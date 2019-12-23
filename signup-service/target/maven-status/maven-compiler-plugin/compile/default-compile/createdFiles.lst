@@ -1,0 +1,14 @@
+com\cognizant\signupservice\controller\UserController.class
+com\cognizant\signupservice\WebConfig.class
+com\cognizant\signupservice\security\AppUser.class
+com\cognizant\signupservice\service\AppUserDetailsService.class
+com\cognizant\signupservice\repository\RoleRepository.class
+com\cognizant\signupservice\exception\GlobalExceptionHandler.class
+com\cognizant\signupservice\model\User.class
+com\cognizant\signupservice\model\Role.class
+com\cognizant\signupservice\exception\UserAlreadyExistsException.class
+com\cognizant\signupservice\repository\UserRepository.class
+com\cognizant\signupservice\GlobalExceptionHandler.class
+com\cognizant\signupservice\SignupServiceApplication.class
+com\cognizant\signupservice\security\SecurityConfig.class
+com\cognizant\signupservice\service\UserService.class
