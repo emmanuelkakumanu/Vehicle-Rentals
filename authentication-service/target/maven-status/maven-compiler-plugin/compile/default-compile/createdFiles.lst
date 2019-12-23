@@ -1,0 +1,12 @@
+com\cognizant\authenticationservice\controller\UserController.class
+com\cognizant\authenticationservice\controller\AuthenticationController.class
+com\cognizant\authenticationservice\WebConfig.class
+com\cognizant\authenticationservice\model\User.class
+com\cognizant\authenticationservice\security\AppUser.class
+com\cognizant\authenticationservice\exception\GlobalExceptionHandler.class
+com\cognizant\authenticationservice\AuthenticationServiceApplication.class
+com\cognizant\authenticationservice\repository\UserRepository.class
+com\cognizant\authenticationservice\security\SecurityConfig.class
+com\cognizant\authenticationservice\repository\RoleRepository.class
+com\cognizant\authenticationservice\model\Role.class
+com\cognizant\authenticationservice\service\AppUserDetailsService.class
