@@ -1,0 +1,161 @@
+<!-- <p>vehicle-edit works!</p> -->
+<form [formGroup]="editForm" (ngSubmit)="onSaveClick()">
+    <div class="container-fluid">
+        <h1 class="mt-4 ml-4">Vehicle Details</h1>
+        <!-- <div class="alert alert-info mt-2  ml-4 mr-4" *ngIf="foodEdited"  *ngIf="saved" role="alert"> -->
+        <div class="alert alert-info mt-2  ml-4 mr-4" *ngIf="saved" role="alert">
+            Vehicle details saved successfully.
+        </div>
+        <div class="form-row mt-2 ml-4 mr-4">
+            <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                <label for="name">
+                    <span>Vehicle Name</span>
+                </label>
+                <input type="text" class="form-control" formControlName="name" id="name">
+                <div class="form-text text-danger" *ngIf="((name.invalid) && (name.touched || name.dirty))" id="name">
+                    <small *ngIf="name.errors.required" class="error">Vehicle Name is Required</small>
+                    <small *ngIf="name.errors.minlength" class="error">Vehicle Name must at least have 2
+                        characters.</small>
+                    <small *ngIf="name.errors.maxlength" class="error">Vehicle Name cannot exceed 200 characters</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                <label for="model">
+                    <span>Vehicle Model</span>
+                </label>
+                <input type="text" class="form-control " formControlName="model" id="model">
+                <div class="form-text text-danger" *ngIf="((model.invalid) && (model.touched || model.dirty))"
+                    id="model">
+                    <small *ngIf="model.errors.required" class="error">Vehicle Model is Required</small>
+                    <small *ngIf="model.errors.minlength" class="error">Vehicle Model must at least have 2
+                        characters.</small>
+                    <small *ngIf="model.errors.maxlength" class="error">Vehicle Model cannot exceed 200
+                        characters</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-2 ml-4 mr-4">
+            <div class="form-group col">
+                <label for="image">Photo URL</label>
+                <input type="text" class="form-control" id="image" formControlName="imageUrl">
+                <div class="validation-error text-danger"
+                    *ngIf="editForm.get('imageUrl').touched && editForm.get('imageUrl').hasError('required')">
+                    Photo URL is required</div>
+            </div>
+        </div>
+        <div class="form-row mt-2 ml-4 mr-4">
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="rent">
+                    <span>Rent </span>
+                </label>
+                <input type="text" formControlName="rent" class="form-control" id="rent">
+                <div class="form-text text-danger" *ngIf="((rent.invalid) && (rent.touched || rent.dirty))" id="rent">
+                    <small *ngIf="rent.errors.required" class="error">Rent is Required</small>
+                    <small *ngIf="rent.errors.pattern" class="error">Rent can only contain numbers</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="mileage">
+                    <span>Mileage (.in Km) </span>
+                </label>
+                <input type="text" formControlName="mileage" class="form-control" id="mileage">
+                <div class="form-text text-danger" *ngIf="((mileage.invalid) && (mileage.touched || mileage.dirty))"
+                    id="mileage">
+                    <small *ngIf="mileage.errors.required" class="error">Mileage is Required</small>
+                    <small *ngIf="mileage.errors.pattern" class="error">Mileage can only contain numbers</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="number">
+                    <span>Number Plate Details </span>
+                </label>
+                <input type="text" formControlName="number" class="form-control" id="number">
+                <div class="form-text text-danger" *ngIf="((number.invalid) && (number.touched || number.dirty))"
+                    id="number">
+                    <small *ngIf="number.errors.required" class="error">Number Plate is Required</small>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="yearOfManufacture">
+                    <span>Manufacture Date </span>
+                </label>
+                <input type="text" class="form-control" formControlName="yearOfManufacture" id="yearOfManufacture"
+                    placeholder="dd/MM/yyyy">
+                <div class="form-text text-danger"
+                    *ngIf="((yearOfManufacture.invalid) && (yearOfManufacture.touched || yearOfManufacture.dirty))"
+                    id="yearOfManufacture">
+                    <small *ngIf="yearOfManufacture.errors.required" class="error">Year Of Manufacture is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="insuranceRenewalDate">
+                    <span>Insurance Renewal Date </span>
+                </label>
+                <input type="text" class="form-control" formControlName="insuranceRenewalDate" id="insuranceRenewalDate"
+                    placeholder="dd/MM/yyyy">
+                <div class="form-text text-danger"
+                    *ngIf="((insuranceRenewalDate.invalid) && (insuranceRenewalDate.touched || insuranceRenewalDate.dirty))"
+                    id="insuranceRenewalDate">
+                    <small *ngIf="insuranceRenewalDate.errors.required" class="error">Insurance Renewal Date is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="lastServiceDate">
+                    <span>Last Service Date </span>
+                </label>
+                <input type="text" class="form-control" formControlName="lastServiceDate" id="lastServiceDate"
+                    placeholder="dd/MM/yyyy">
+                <div class="form-text text-danger"
+                    *ngIf="((lastServiceDate.invalid) && (lastServiceDate.touched || lastServiceDate.dirty))"
+                    id="lastServiceDate">
+                    <small *ngIf="lastServiceDate.errors.required" class="error">Last Service Date is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="nextServiceDate">
+                    <span>Next Service Date </span>
+                </label>
+                <input type="text" class="form-control" formControlName="nextServiceDate" id="nextServiceDate"
+                    placeholder="dd/MM/yyyy">
+                <div class="form-text text-danger"
+                    *ngIf="((nextServiceDate.invalid) && (nextServiceDate.touched || nextServiceDate.dirty))"
+                    id="nextServiceDate">
+                    <small *ngIf="nextServiceDate.errors.required" class="error">Next Service Date is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="seater">
+                    <span>Seater </span>
+                </label>
+                <input type="text" class="form-control" formControlName="seater" id="seater" placeholder="Enter seater">
+                <div class="form-text text-danger" *ngIf="((seater.invalid) && (seater.touched || seater.dirty))"
+                    id="seater">
+                    <small *ngIf="seater.errors.required" class="error">Seater is
+                        Required</small>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="vehicleType">
+                    <span>Vehicle Type </span>
+                </label>
+                <input type="text" class="form-control" formControlName="vehicleType" id="vehicleType"
+                    placeholder="Enter Vehicle Type">
+                <div class="form-text text-danger"
+                    *ngIf="((vehicleType.invalid) && (vehicleType.touched || vehicleType.dirty))" id="vehicleType">
+                    <small *ngIf="vehicleType.errors.required" class="error">Vehicle Type is
+                        Required</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-2 ml-4 mr-4">
+            <a href="#">
+                <button type="submit" class="btn btn-success font-weight-bold" [disabled]="!editForm">Save</button>
+            </a>
+        </div>
+    </div>
+</form>

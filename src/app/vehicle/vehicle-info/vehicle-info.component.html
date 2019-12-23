@@ -1,0 +1,126 @@
+<!-- <p>vehicle-info works!</p> -->
+<div class="card mb-4 border-dark">
+    <img src={{vehicle.imageUrl}} alt="Vehicles" class="card-image-top" height=300>
+    <div class="card-body">
+        <div class="card-title font-weight-bold">
+            <div class="d-flex">
+                <div class="flex-shrink-1">{{vehicle.name}}</div>
+                <div class="flex-grow-1">
+                    <div class="text-danger font-weight-bold text-right">&#8377;{{vehicle.rent | number}}/hr
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-subtitle mb-2 text-muted">
+            <div class="d-flex">
+                <div class="flex-shrink-1">{{vehicle.model}}</div>
+                <div class="flex-grow-1">
+                    <div class="text-dark font-weight-bold text-right">{{vehicle.number}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-text mt-2">
+            <div class="card-subtitle mb-2 text-muted">
+                <div class="d-flex">
+                    <div class="flex-shrink-1">
+                        <i class="material-icons text-danger">speed</i>
+                        {{vehicle.mileage}}km/l
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="text-dark font-weight-bold text-right">
+                            <i class="material-icons text-danger">event_seat</i>
+                            {{vehicle.seater}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs nav-fill nav-justified mb-3" *ngIf="role != 'ADMIN'" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link bg-dark font-weight-bold text-light" [routerLink]="['/booking',vehicle.id]" *ngIf="role != 'ADMIN'" data-toggle="pill"
+                        href="#" role="tab" aria-controls="pills-user" aria-selected="true">Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-light font-weight-bold text-danger" [routerLink]="['/vehicle']"
+                        *ngIf="role != 'ADMIN'" data-toggle="pill" href="#" role="tab" aria-controls="pills-admin"
+                        aria-selected="false">Cancel</a>
+                </li>
+            </ul>
+            <ul class="nav nav-tabs nav-fill nav-justified mb-3" *ngIf="role == 'ADMIN'" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link bg-dark font-weight-bold text-light" *ngIf="role == 'ADMIN'" data-toggle="pill"
+                        href="#" role="tab" aria-controls="pills-user" aria-selected="true"
+                        [routerLink]="['/vehicle-edit',vehicle.id]">
+                        <i class="material-icons text-light">create</i>
+                        Edit
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-light font-weight-bold text-danger" (click)="onRemovingVehicle(vehicle.id)"
+                        *ngIf="role == 'ADMIN'" data-toggle="pill" href="#" role="tab" aria-controls="pills-admin"
+                        aria-selected="false">
+                        <i class="material-icons text-danger">clear</i>
+                        Delete
+                    </a>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-secondary" *ngIf="!isExpanded(vehicle.id)"
+                (click)="viewMoreDetails(vehicle.id)" data-toggle="collapse" data-target="#viewMore">
+                View More
+            </button>
+            <button type="button" class="btn btn-secondary" *ngIf="isExpanded(vehicle.id)" (click)="viewLessDetails(vehicle.id)"
+                data-toggle="collapse" data-target="#viewMore">
+                View Less
+            </button>
+            <br>
+            <br>
+            <div class="collapse" id="viewMore" *ngIf="isExpanded(vehicle.id)">
+                <div class="card card-body">
+                    <div class="d-flex">
+                        <div class="flex-shrink-1">
+                            Manufactured Year
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-dark font-weight-bold text-right">
+                                {{vehicle.yearOfManufacture}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-1">
+                            Insurance Renewal Date
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-dark font-weight-bold text-right">
+                                <!-- <i class="material-icons date">calendar_today</i> -->
+                                {{vehicle.insuranceRenewalDate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-1">
+                            Last Service Date
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-dark font-weight-bold text-right">
+                                <!-- <i class="material-icons date">calendar_today</i> -->
+                                {{vehicle.lastServiceDate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-1">
+                            Next Service Data
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-dark font-weight-bold text-right">
+                                <!-- <i class="material-icons date">calendar_today</i> -->
+                                {{vehicle.nextServiceDate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

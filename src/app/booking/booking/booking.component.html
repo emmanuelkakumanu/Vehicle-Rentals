@@ -1,0 +1,69 @@
+
+<div class="container">
+    <div class="card mt-4">
+        <div class="text-center">
+            <h1 class="mt-4 ml-4 mb-4">Booking Details</h1>
+            <h5 class="mt-3">Name : {{vehicle?.name}}</h5>
+            <h5 class="mt-3"> Model : {{vehicle?.model}}</h5>
+            <h5 class="mt-3">Registration Number : {{vehicle?.number}}</h5>
+            <h5 class="mt-3"> Rent : {{vehicle?.rent}}/hr</h5>
+        </div>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSaveClick()">
+            <div class="container-fluid">
+                <div class="alert alert-success mt-2  ml-4 mr-4" *ngIf="saved && !errorMsg" role="alert">
+                    Booking details saved successfully.
+                </div>
+                <div class="alert alert-danger mt-2  ml-4 mr-4" *ngIf="errorMsg" role="alert">
+                    Please check the booking date.
+                </div>
+                <div>
+                    <div class="form-row ml-3 mr-3 mb-4">
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="startDate">
+                                <h5>Start Date </h5>
+                            </label>
+                            <input type="datetime-local" class="form-control" formControlName="startDate"
+                                [min]="presentDate | date:'yyyy-MM-ddTHH:mm'" id="startDate" placeholder="dd/MM/yyyy">
+                            <div class="form-text text-danger"
+                                *ngIf="((startDate.invalid) && (startDate.touched || startDate.dirty))" id="startDate">
+                                <small *ngIf="startDate.errors.required" class="error">Start Date is
+                                    Required</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="endDate">
+                                <h5>End Date </h5>
+                            </label>
+                            <input type="datetime-local" class="form-control"
+                                [min]="presentDate | date:'yyyy-MM-ddTHH:mm'" formControlName="endDate" id="endDate"
+                                placeholder="dd/MM/yyyy">
+                            <div class="form-text text-danger"
+                                *ngIf="((endDate.invalid) && (endDate.touched || endDate.dirty))" id="endDate">
+                                <small *ngIf="endDate.errors.required" class="error">End Date is
+                                    Required</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4" *ngIf="isBooked && !errorMsg">
+                            <label for="total">
+                                <h5>Total </h5>
+                            </label>
+                            <input type="text" class="form-control" formControlName="total" id="total" [readonly]="hide()">
+                        </div>
+                    </div>
+                    <ul class="pagination row justify-content-center">
+                        <li class="page-item"><button class="btn btn-danger" routerLink="/vehicle">BACK</button></li>
+                        <li class="page-item ml-3"><button type="submit" class="btn btn-dark"
+                                [disabled]="!bookingForm.valid && errorMsg">BOOK</button>
+                        </li>
+                    </ul>
+                    <ul class="pagination row justify-content-center">
+                        <li class="page-item">
+                            <button class="btn btn-dark" *ngIf="isBooked" [disabled]="errorMsg" (click)="next()">NEXT
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

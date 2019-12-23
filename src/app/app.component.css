@@ -1,0 +1,13 @@
+.navbar{
+    background-color: #0b4668;
+}
+.material-icons{
+    vertical-align : middle;
+}
+.opacity{
+    opacity : 0.8;
+}
+.jumbotron{
+    background-image : url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uLsSZ7Pdpyatv4Fb4vdtv8y7aHhVBNdhjlDy3S1MU-k6GpZAVg&s");
+    background-size : 75%;
+}

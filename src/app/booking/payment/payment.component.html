@@ -1,0 +1,49 @@
+<!-- <p>payment works!</p> -->
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+        <h1 class="mt-4 ml-4">Vehicle Details</h1>
+        <div class="alert alert-success mt-2  ml-4 mr-4" *ngIf="saved" role="alert">
+            Payment successfull.
+        </div>
+        <div class="alert alert-danger mt-2  ml-4 mr-4" *ngIf="error == 'Insufficient Balance Exception'" role="alert">
+            Insufficient Balance...
+        </div>
+        <div class="alert alert-danger mt-2  ml-4 mr-4" *ngIf="error == 'Account Not Found Exception'" role="alert">
+            Check Card Credentials...
+        </div>
+        <div class="form-row mt-4 ml-4 mr-4">
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="cardNumber">
+                    <h5>Card No.</h5>
+                </label>
+                <input type="text" class="form-control" formControlName="cardNumber" id="cardNumber">
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="cvvNumber">
+                    <h5>CVV No.</h5>
+                </label>
+                <input type="text" class="form-control " formControlName="cvvNumber" id="cvvNumber">
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="expiryDate">
+                    <h5>Expiry Date</h5>
+                </label>
+                <input type="date" class="form-control " formControlName="expiryDate" id="expiryDate"
+                    placeholder="dd/MM/yyyy">
+            </div>
+            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                <label for="total">
+                    <h5>Total</h5>
+                </label>
+                <input type="text" class="form-control" formControlName="total" id="total" [readonly]="hide()">
+            </div>
+            <div class="form-group col">
+                <ul class="pagination row justify-content-center">
+                    <li class="page-item"><button class="btn btn-dark" routerLink="/vehicle">CANCEL</button></li>
+                    <li class="page-item ml-3"><button type="submit" class="btn btn-danger">Pay</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

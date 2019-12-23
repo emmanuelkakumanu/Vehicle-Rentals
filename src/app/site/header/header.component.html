@@ -1,0 +1,77 @@
+<!-- <p>header works!</p> -->
+<nav class="navbar navbar-expand-lg opacity navbar-dark">
+    <a [routerLink]="['/vehicle']"><i class="material-icons mb-2 size text-light">directions_car</i></a>
+    <h3 class="text-light mr-auto ml-2">Go-Kart</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="!isAuthenticated()">
+                <a class="nav-link" routerLink="login">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger font-weight-bold">
+                            Login
+                        </button>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!isAuthenticated()">
+                <a class="nav-link" routerLink="signup">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger font-weight-bold">
+                            Register
+                        </button>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated()">
+                <a class="nav-link">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">
+                            <i class="material-icons">account_box</i>
+                            <span class="font-weight-bold">{{user()}}</span>
+                        </button>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated() || logged">
+                <a class="nav-link" routerLink="vehicle">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger font-weight-bold">
+                            Vehicles
+                        </button>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated() && role() != 'ADMIN'">
+                    <a class="nav-link" routerLink="my-booking">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger font-weight-bold">
+                                My Booking 
+                            </button>
+                        </div>
+                    </a>
+                </li>
+            <li class="nav-item" *ngIf="isAuthenticated() && role() == 'ADMIN'">
+                <a class="nav-link" routerLink="view-request">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger font-weight-bold">
+                            Requests
+                        </button>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isAuthenticated()">
+                <a class="nav-link" href="#" (click)="onSignOut()">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger font-weight-bold">
+                            Logout
+                        </button>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>

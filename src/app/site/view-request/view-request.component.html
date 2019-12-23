@@ -1,0 +1,53 @@
+<!-- <p>view-request works!</p> -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-lg-7">
+            <div class="h1">Pending Requests</div>
+            <div class="row d-flex justify-content-between" *ngIf="vanish && (user!=0 && user!=null)">
+                <div class="col-12 mt-3 alert alert-success">
+                    New user added successfully.
+                </div>
+            </div>
+            <div class="row d-flex justify-content-between" *ngIf="msg && (user!=0 && user!=null)">
+                <div class="col-12 mt-3 alert alert-danger">
+                    Request Declined.
+                </div>
+            </div>
+            <div class="row d-flex justify-content-between" *ngIf="!msg && !vanish && (user==0 || user==null)">
+                <div class="col-12 mt-3 alert alert-info">
+                    No Pending Request.
+                </div>
+            </div>
+            <div class="card" *ngIf="user!=0 && user!=null">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let req of user">
+                        <div class="row text-muted mr-2 ml-2">
+                            <span class="h3">{{req.userName}}</span>
+                            <span class=" text-info h6 mt-2 ml-auto" *ngFor="let role of req.roleList">
+                                {{role.name}}
+                                <div class="row text-muted mt-2 mr-2 ml-auto">
+                                    <a>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success"
+                                                (click)="onAcceptRequest(req)">
+                                                Accept
+                                            </button>
+                                        </div>
+                                    </a>
+                                    <a>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="onDeclineRequest(req)">
+                                                Decline
+                                            </button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
