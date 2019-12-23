@@ -1,0 +1,16 @@
+com\cognizant\vehicleservice\model\Role.class
+com\cognizant\vehicleservice\security\AppUser.class
+com\cognizant\vehicleservice\repository\RoleRepository.class
+com\cognizant\vehicleservice\service\AppUserDetailsService.class
+com\cognizant\vehicleservice\model\controller\VehicleController.class
+com\cognizant\vehicleservice\exception\VehicleNotFoundException.class
+com\cognizant\vehicleservice\WebConfig.class
+com\cognizant\vehicleservice\VehicleServiceApplication.class
+com\cognizant\vehicleservice\model\User.class
+com\cognizant\vehicleservice\model\Vehicle.class
+com\cognizant\vehicleservice\exception\GlobalExceptionHandler.class
+com\cognizant\vehicleservice\service\VehicleService.class
+com\cognizant\vehicleservice\model\controller\AuthenticationController.class
+com\cognizant\vehicleservice\repository\VehicleRepository.class
+com\cognizant\vehicleservice\security\SecurityConfig.class
+com\cognizant\vehicleservice\repository\UserRepository.class
