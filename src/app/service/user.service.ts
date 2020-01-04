@@ -9,23 +9,15 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  //userApiUrl = environment.baseUrl + '/users';
-  userApiUrl = 'http://localhost:8023/users';
+  userApiUrl = environment.baseUrl + '/signup-service/users';
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
-  // authenticate(userName: string, password: string): Observable<User> {
-  //   return Observable.create((observer: Observer<any>) => {
-  //     if (userName != 'Admin') {
-  //       observer.next({ userName, firstName: userName, lastName: '', role: 'Customer', accessToken: 'JWT-TOKEN' });
-  //     } else {
-  //       observer.next({ userName, firstName: userName, lastName: '', role: 'Admin', accessToken: 'JWT-TOKEN' });
-  //     }
-  //     return null;
-  //   });
-  // }
   addUser(user: User) {
-    console.log(user);
-    console.log(this.userApiUrl, user);
+    //console.log(user);
+    //console.log(this.userApiUrl, user);
     return this.httpClient.post(this.userApiUrl, user);
+  }
+  deleteUser(user: User) {
+    return this.httpClient.post(this.userApiUrl+'/deleteuser',user);
   }
   getAllPendingUsers(): Observable<any[]> {
     const httpOptions = {
@@ -35,6 +27,15 @@ export class UserService {
       })
     };
     return this.httpClient.get<User[]>(this.userApiUrl, httpOptions);
+  }
+  getAllUsers(): Observable<User[]>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.userAuthService.getToken()
+      })
+    };
+    return this.httpClient.get<User[]>(this.userApiUrl+'/activeusers', httpOptions);
   }
   getUser(userId: number): Observable<any> {
     const httpOptions = {

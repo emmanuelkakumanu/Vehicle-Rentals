@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserAuthService } from 'src/app/service/user-auth.service';
 import { User } from 'src/app/service/User';
 import { UserService } from 'src/app/service/user.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-view-request',
@@ -12,13 +13,21 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./view-request.component.css']
 })
 export class ViewRequestComponent implements OnInit {
+  activeRole : string;
   user: User[];
   error: string;
   vanish:boolean;
   msg:boolean;
-  constructor(private userAuthService: UserAuthService, private httpClient: HttpClient, private userService: UserService) { }
+  activeUser:string;
+  existingUsers : User[];
+  constructor(private userAuthService: UserAuthService, private httpClient: HttpClient, private userService: UserService,private  authenticationService : AuthenticationService) { }
 
   ngOnInit() {
+    this.userService.getAllUsers().subscribe(data=> {console.log(data)
+      this.existingUsers=data;
+    });
+    this.activeUser=this.userAuthService.getUser();
+    this.activeRole =this.userAuthService.getRole();  
     this.userService.getAllPendingUsers().subscribe(
       (user) => {
         if (user) {
@@ -43,20 +52,6 @@ export class ViewRequestComponent implements OnInit {
       }, 1000);
       this.ngOnInit();
     });
-    // this.userService.updateAcceptRequest(user).subscribe(()=>
-    //   this.userService.getAllPendingUsers().subscribe(
-    //     (user) => {
-    //       if(user){
-    //         console.log(user);
-    //         this.user = user;
-    //         setTimeout(() => {
-    //           this.vanish = false;
-    //         }, 1000);
-    //         return false;
-    //       }
-    //     }
-    //   )
-    // );
   }
   onDeclineRequest(user: User) {
     user.active = false;
@@ -71,4 +66,17 @@ export class ViewRequestComponent implements OnInit {
   }
 
 
+  deleteUser(user : User) {
+    user.active = false;
+    this.userService.deleteUser(user).subscribe(data => {
+      setTimeout(() => {
+      }, 1000);
+      this.ngOnInit();
+    });
+  }
 }
+  
+    
+    
+  
+

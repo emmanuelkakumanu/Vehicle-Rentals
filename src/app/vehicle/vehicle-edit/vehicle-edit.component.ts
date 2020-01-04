@@ -102,23 +102,10 @@ export class VehicleEditComponent implements OnInit {
     return this.editForm.get('vehicleType');
   }
 
-
-  // onInsertVehicle(vehicle: Vehicle) {
-  //   vehicle = this.editForm.value;
-  //   this.vehicleService.addVehicle(vehicle).subscribe(
-  //     data => {
-  //       console.log('MenuItem inserted successfully.');
-  //       this.error = '';
-  //       this.saved = true;
-  //       console.log("Is saved -> " + this.saved)
-  //     }
-  //   );
-  // }
   onSaveClick() {
-    console.log(this.editForm.value);
     this.vehicleService.updateVehicle(this.editForm.value).subscribe(
       data => {
-        console.log('MenuItem update successful.');
+        console.log('update successful.');
         this.error = '';
         this.saved = true;
         console.log("Is saved -> " + this.saved)

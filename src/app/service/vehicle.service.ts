@@ -10,7 +10,7 @@ import { Vehicle } from './Vehicle';
 })
 export class VehicleService {
  // vehicleApiUrl = environment.baseUrl + '/vehicles';
-  vehicleApiUrl = 'http://localhost:8022/vehicle-service'
+  vehicleApiUrl = environment.baseUrl+'/vehicle-service/vehicles'
   filter = new Subject();
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
   getAllVehicles(): Observable<any[]> {
@@ -31,15 +31,6 @@ export class VehicleService {
     };
     return this.httpClient.get<Vehicle>(this.vehicleApiUrl + "/" + vehicleId, httpOptions);
   }
-  // addVehicle(vehicle:Vehicle): Observable<any>{
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer ' + this.userAuthService.getToken()
-  //     })
-  //   };
-  //   return this.httpClient.post(this.vehicleApiUrl, vehicle, httpOptions);
-  // }
   updateVehicle(vehicle:Vehicle): Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({

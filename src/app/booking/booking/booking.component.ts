@@ -30,7 +30,7 @@ export class BookingComponent implements OnInit {
   vehicleId: any;
   bookingId: number;
   isBooked = false;
-  errorMsg:boolean;
+  errorMsg: boolean;
   presentDate = new Date().toJSON();
   constructor(private vehicleService: VehicleService, private route: ActivatedRoute, private fb: FormBuilder,
     private bookingService: BookingService, private router: Router,
@@ -54,11 +54,11 @@ export class BookingComponent implements OnInit {
         this.user = this.userAuthService.getId();
         this.bookingForm.patchValue({ vehicle: data })
         this.vehicle = data;
-        console.log(data);
-        console.log(this.user);
+       // console.log(data);
+       // console.log(this.user);
       });
       this.userService.getUser(this.userAuthService.getId()).subscribe((user: User) => {
-        console.log(user);
+        //console.log(user);
         this.bookingForm.patchValue({ user: user })
       });
     });
@@ -70,26 +70,16 @@ export class BookingComponent implements OnInit {
     this.rentMinutes = Math.floor(((rentMilliSeconds / (1000 * 60))));
     this.rentHours = Math.floor(this.rentMinutes / 60);
     this.rent = this.rentHours * this.bookingForm.value.vehicle.rent;
-    console.log(this.rent)
+   // console.log(this.rent)
     this.rentDays = Math.floor(this.rentHours / 24);
     this.rentHours %= 24;
     this.rentMinutes %= 60;
     this.bookingForm.value.total = this.rent;
-    // this.bookingForm.value.status =true;
-    console.log(this.bookingForm.value);
+
+   // console.log(this.bookingForm.value);
     this.isBooked = true;
     this.saved = true;
-    // this.bookingService.updateBooking(this.bookingForm.value).subscribe(
-    //   data => {
-    //     console.log('update successful.');
-    //     console.log(this.bookingForm.value);
-    //     this.error = '';
-    //     this.saved = true;
-    //     this.isBooked = true;
-    //     console.log("Is saved -> " + this.saved)
-    //   }
-    // );
-    // this.router.navigate(['/payment']);
+
     if (this.rent < 0) {
       this.errorMsg = true;
     }
@@ -97,12 +87,11 @@ export class BookingComponent implements OnInit {
       this.errorMsg = false;
       this.bookingForm.patchValue({ total: this.rent });
     }
-
     this.bookingService.setBookingDetails(this.bookingForm.value);
 
   }
-  hide(){
-    if(this.rent != null){
+  hide() {
+    if (this.rent != null) {
       return true;
     }
   }

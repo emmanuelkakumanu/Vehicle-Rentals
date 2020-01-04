@@ -24,7 +24,7 @@ export class MyBookingComponent implements OnInit {
         console.log(data);
         this.bookings = data;
         this.payment = this.bookingService.getPaymentDetail();
-        console.log(this.payment);
+       // console.log(this.payment);
       }
     });
   }
@@ -32,7 +32,7 @@ export class MyBookingComponent implements OnInit {
     this.bookingCancel = true;
     this.bookingId = booking.id;
     this.bookingTotal = booking.total;
-    console.log("booking id: ",booking.id);
+   // console.log("booking id: ",booking.id);
     this.bookingService.deleteBooking(booking.id).subscribe(data => {
       this.bookings = data;
       this.msg = true;

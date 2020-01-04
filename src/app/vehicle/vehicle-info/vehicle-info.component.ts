@@ -24,6 +24,7 @@ export class VehicleInfoComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.userAuthService.getRole();
+    console.log("role :"+this.role);
   }
 
   onRemovingVehicle(vehicleId: number) {
@@ -46,6 +47,4 @@ export class VehicleInfoComponent implements OnInit {
       return true;
     }
   }
-  
-
 }

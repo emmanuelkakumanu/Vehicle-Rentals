@@ -21,12 +21,11 @@ export class PaymentComponent implements OnInit {
   bookings: Booking[];
   saved: boolean;
   constructor(private fb: FormBuilder, private bookingService: BookingService, private router: Router, private route: ActivatedRoute, private userAuthService: UserAuthService) { }
-
   ngOnInit() {
     this.paymentForm = this.fb.group({
       id: [],
-      cardNumber: [, Validators.required],
-      cvvNumber: [, Validators.required],
+      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16),Validators.pattern('^[0-9+]*')]],
+      cvvNumber:['', [Validators.required, Validators.minLength(3), Validators.maxLength(3),Validators.pattern('^[0-9+]*')]],
       expiryDate: [, Validators.required],
       total:[]
     });
@@ -39,30 +38,25 @@ export class PaymentComponent implements OnInit {
         console.log(data);
         this.bookings = data;
         this.payment = this.bookingService.getPaymentDetail();
-        // console.log(this.payment);
       }
     });
     this.paymentForm.patchValue({total:this.total});
   }
   onSubmit() {
-    console.log(this.paymentForm.value);
-    console.log(this.booking);
-    this.bookingService.updateBooking(this.booking).subscribe((data) => {
-      this.booking.bookingStatus = true;
-      console.log(this.booking);
-      console.log(data);
-      this.bookingService.updatePayment(this.booking, this.paymentForm.value).subscribe((data) => {
+    this.bookingService.updateBooking(this.booking).subscribe((data) => {      
+      this.bookingService.updatePayment(this.booking, this.paymentForm.value).subscribe((data) => {    
+        this.booking.bookingStatus = true;
         this.saved = true;
-        console.log(data);
-      }, (error) => {
-        console.log(error.error.message);
+        setTimeout(() => {
+         // this.saved = false;
+        }, 1000);
+        this.router.navigate(["/my-booking"])       
+      }, (error) => {        
         this.error = error.error.message;
       });
-    }, (error) => {
-      console.log(error.error.message);
+    }, (error) => {      
       this.error = error.error.message;
     });
-
   }
   hide(){
     if (this.total != null) {

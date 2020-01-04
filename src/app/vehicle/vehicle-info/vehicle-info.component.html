@@ -1,4 +1,3 @@
-<!-- <p>vehicle-info works!</p> -->
 <div class="card mb-4 border-dark">
     <img src={{vehicle.imageUrl}} alt="Vehicles" class="card-image-top" height=300>
     <div class="card-body">
@@ -40,11 +39,11 @@
                     <a class="nav-link bg-dark font-weight-bold text-light" [routerLink]="['/booking',vehicle.id]" *ngIf="role != 'ADMIN'" data-toggle="pill"
                         href="#" role="tab" aria-controls="pills-user" aria-selected="true">Book</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item" *ngIf="role=='USER'">
                     <a class="nav-link bg-light font-weight-bold text-danger" [routerLink]="['/vehicle']"
                         *ngIf="role != 'ADMIN'" data-toggle="pill" href="#" role="tab" aria-controls="pills-admin"
                         aria-selected="false">Cancel</a>
-                </li>
+                </li> -->
             </ul>
             <ul class="nav nav-tabs nav-fill nav-justified mb-3" *ngIf="role == 'ADMIN'" role="tablist">
                 <li class="nav-item">
@@ -92,8 +91,7 @@
                         </div>
                         <div class="flex-grow-1">
                             <div class="text-dark font-weight-bold text-right">
-                                <!-- <i class="material-icons date">calendar_today</i> -->
-                                {{vehicle.insuranceRenewalDate}}
+                               {{vehicle.insuranceRenewalDate}}
                             </div>
                         </div>
                     </div>
@@ -103,7 +101,7 @@
                         </div>
                         <div class="flex-grow-1">
                             <div class="text-dark font-weight-bold text-right">
-                                <!-- <i class="material-icons date">calendar_today</i> -->
+                               
                                 {{vehicle.lastServiceDate}}
                             </div>
                         </div>
@@ -114,7 +112,6 @@
                         </div>
                         <div class="flex-grow-1">
                             <div class="text-dark font-weight-bold text-right">
-                                <!-- <i class="material-icons date">calendar_today</i> -->
                                 {{vehicle.nextServiceDate}}
                             </div>
                         </div>

@@ -34,18 +34,16 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit(loginForm: any) {
-    console.log(loginForm.value.username);
-    console.log(loginForm.value.password);
+    //console.log(loginForm.value.username);
+    //console.log(loginForm.value.password);
     this.authenticationService.authenticate(loginForm.value.username, loginForm.value.password).subscribe((data) => {
-      console.log(this.loginForm.value.username);
-      console.log(this.loginForm.value.password);
+      //console.log(this.loginForm.value.username);
+      //console.log(this.loginForm.value.password);
       this.userAuthService.loggedIn = true;
       this.status = this.userAuthService.loggedIn;
       console.log("role: " + data.role);
       console.log("user: " + data.token);
-      console.log("user: " + data.user);
       console.log("userId: "+ data.id);
-      console.log("Logged in...");
       this.userAuthService.setToken(data.token);
       this.userAuthService.setRole(data.role);
       this.userAuthService.setUser(data.user);
@@ -54,9 +52,9 @@ export class LoginComponent implements OnInit {
     },
       (error) => {
         this.isLoginValid = false;
-        // this.router.navigate([this.userAuthService.redirectUrl]);
+        console.log('user : '+this.user);
         console.log(`hey error ` + JSON.stringify(error));
-        console.log(this.user);
+        
         if (error.status == 401) {
           this.error = "Invalid username/password";
         }

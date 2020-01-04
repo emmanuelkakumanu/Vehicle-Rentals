@@ -11,9 +11,12 @@ import { Payment } from './Payment';
 })
 export class BookingService {
 
-  bookingApiUrl = 'http://localhost:8024/booking';
-  paymentApiUrl = 'http://localhost:8024/payment';
-  transactionApiUrl = 'http://localhost:8024/transaction';
+  //bookingApiUrl = 'http://localhost:8024/booking';
+  //paymentApiUrl = 'http://localhost:8024/payment';
+  //transactionApiUrl = 'http://localhost:8024/transaction';
+  bookingApiUrl = environment.baseUrl+'/booking-service/booking';
+  paymentApiUrl = environment.baseUrl+'/booking-service/payment';
+  transactionApiUrl = environment.baseUrl+'/booking-service/transaction';
   booking: Booking;
   payment: Payment;
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
@@ -27,8 +30,6 @@ export class BookingService {
     return this.httpClient.get<Booking[]>(this.bookingApiUrl + "/" + userId, httpOptions);
   }
   updateBooking(booking: Booking): Observable<any> {
-    console.log(booking);
-    console.log(booking.bookingStatus);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -39,15 +40,16 @@ export class BookingService {
   }
   updatePayment(bookingDetail: Booking, payment: Payment): Observable<any> {
     this.payment = payment;
-    console.log(bookingDetail);
-    console.log(this.payment);
+   console.log(bookingDetail);
+   console.log(this.payment);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.userAuthService.getToken()
       })
     };
-    return this.httpClient.put(this.paymentApiUrl, { bookingDetail, payment }, httpOptions);
+    return this.httpClient.put(this.paymentApiUrl, payment , httpOptions);
+    //{ bookingDetail, payment }
   }
   getPayment(userId: number): Observable<any> {
     const httpOptions = {

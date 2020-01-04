@@ -10,6 +10,7 @@ import { UserAuthService } from 'src/app/service/user-auth.service';
 export class HeaderComponent implements OnInit {
 
   logged:boolean;
+  status:boolean=true;
   constructor(private router: Router, private userAuthService: UserAuthService) { }
   isAuthenticated() {
     this.logged = true;

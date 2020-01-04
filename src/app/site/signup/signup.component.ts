@@ -5,8 +5,6 @@ import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/service/User';
 import { Role } from 'src/app/service/Role';
 import { UserAuthService } from 'src/app/service/user-auth.service';
-
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -30,13 +28,12 @@ export class SignupComponent implements OnInit {
       Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9]*')]],
       firstName: ['', [Validators.required, Validators.minLength(4),
       Validators.maxLength(20), Validators.pattern('^[a-zA-Z]*')]],
-      lastName: ['', [Validators.required, Validators.minLength(4),
-      Validators.maxLength(20), Validators.pattern('^[a-zA-Z]*')]],
+      lastName: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(20), Validators.pattern('^[a-zA-Z]*')]],
       branch: [''],
       emailId: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$')]],
       age: ['', [Validators.required, Validators.pattern('^[0-9]*')]],
       gender: ['', Validators.required],
-      contactNo: ['', [Validators.required, Validators.minLength(13), Validators.pattern('^[0-9+]*')]],
+      contactNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('^[0-9+]*')]],
       password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       roleList: [this.role],
       confirmPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
@@ -47,20 +44,19 @@ export class SignupComponent implements OnInit {
   addRoleUser() {
     this.isAdmin = false;
     this.role = [{ id: 2, name: 'USER' }];
-    // this.userAuthService.setRoleId(2);
+    
   }
   addRoleAdmin() {
     this.isAdmin = true;
     this.role = [{ id: 1, name: 'ADMIN' }];
-    // this.userAuthService.setRoleId(1);
+    
   }
+  //289610
   onSignup() {
-    console.log("In submit")
-    console.log(this.role);
     if (this.isAdmin) {
       this.signupForm.value.roleList = this.role;
     }
-    console.log(this.signupForm.value.role);
+    console.log("Role :"+this.signupForm.value.role);
     this.userService.addUser(this.signupForm.value).subscribe(
       (response) => {
         console.log(this.signupForm.value.role);
@@ -69,7 +65,6 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       (responseError) => {
-        console.log("User Already Exist. Directly go to Login")
         this.exist = true;
         this.error = responseError.error.errorMessage;
       });
