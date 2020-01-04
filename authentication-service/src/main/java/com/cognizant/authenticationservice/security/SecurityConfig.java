@@ -14,10 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cognizant.authenticationservice.service.AppUserDetailsService;
 
-/**
- * @author 805924
- *
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -39,36 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-//	@Bean
-//	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-//		LOGGER.info("Start");
-//		List<UserDetails> userDetailsList = new ArrayList<>();
-//
-//		userDetailsList.add(User.withUsername("user").password(passwordEncoder().encode("pwd")).roles("USER").build());
-//
-//		userDetailsList
-//				.add(User.withUsername("admin").password(passwordEncoder().encode("pwd")).roles("ADMIN").build());
-//
-//		LOGGER.info("End");
-//		return new InMemoryUserDetailsManager(userDetailsList);
-//	}
-
-	/*
-	 * @Override protected void configure(HttpSecurity httpSecurity) throws
-	 * Exception {
-	 * httpSecurity.csrf().disable().httpBasic().and().authorizeRequests().
-	 * antMatchers("/countries").hasRole("USER")
-	 * .antMatchers("/authenticate").hasAnyRole("USER", "ADMIN"); }
-	 */
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors();
-		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests()
-//		.antMatchers("/menu-items").permitAll()
-//				.antMatchers("/menu-items/{id}").permitAll().antMatchers("/carts").permitAll()
-//				.antMatchers("/carts/{userId}").permitAll()
-//				.antMatchers("/carts/{userId}/{menuItemId}").permitAll()
-				.antMatchers("/authenticate").permitAll()
+		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests().antMatchers("/authenticate").permitAll()
 //		.antMatchers("/users").anonymous()
 				.anyRequest().authenticated();
 //				.and().addFilter(new JwtAuthorizationFilter(authenticationManager()));
