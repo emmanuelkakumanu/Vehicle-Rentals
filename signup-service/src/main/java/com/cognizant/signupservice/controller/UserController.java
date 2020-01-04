@@ -7,8 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,18 +31,13 @@ public class UserController {
 		LOGGER.debug("Role" + user.getRoleList());
 		System.out.println();
 		userService.signup(user);
-		
+
 	}
 
-//	@GetMapping
-//	public List<User> getAllUsers(){
-//		return userService.getAllUsers();
-//	}
-
-//	@GetMapping
-//	public List<User> getAllInActiveUser(){
-//		return userService.getAllInActiveUser();
-//	}
+	@RequestMapping("/activeusers")
+	public List<User> getAllUsers() {
+		return userService.getAllUsers();
+	}
 
 	@GetMapping
 	public List<User> getAllActiveUser() {
@@ -54,6 +47,11 @@ public class UserController {
 	@GetMapping("/{userId}")
 	public User getUser(@PathVariable long userId) {
 		return userService.getUser(userId);
+	}
+
+	@RequestMapping("/deleteuser")
+	public void deleteUser(@RequestBody User user) {
+		userService.deleteUser(user);
 	}
 
 	@PutMapping
