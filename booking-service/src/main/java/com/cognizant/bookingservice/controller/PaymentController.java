@@ -44,14 +44,4 @@ public class PaymentController {
 		paymentService.updatePayment(paymentDTO);
 	}
 
-//	@PutMapping("/credit")
-//	public void refundPayment(@RequestBody PaymentDTO paymentDTO) throws AccountNotFoundException, InsufficientBalance {
-//		paymentService.refundPayment(paymentDTO);
-//	}
-
-//	@PostMapping
-//	public void insertPayment(@RequestBody Payment payment) {
-//		paymentService.updatePayment(payment);
-//	}
-
 }

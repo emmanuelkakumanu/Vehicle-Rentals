@@ -30,8 +30,6 @@ public class BookingDetailService {
 
 	@Transactional
 	public List<BookingDetail> getAllBookingDetails(long userId) {
-//		LOGGER.debug("User Id:"+userId);
-//		return bookingDetailRepository.findAll();
 		return bookingDetailRepository.findByUserId(userId);
 	}
 
@@ -45,30 +43,18 @@ public class BookingDetailService {
 		bookingDetailRepository.save(bookingDetail);
 	}
 
-//	@Transactional
-//	public List<BookingDetail> getBookingDetails(long id) {
-//		return bookingDetailRepository.getBookingDetails(id);
-//	}
 	@Transactional
 	public void deleteBooking(long bookingId) {
 
-		System.out.println(bookingId);
 		BookingDetail booking = bookingDetailRepository.findById(bookingId).get();
-		System.out.println(booking);
 		double transactionAmount = booking.getTotal();
-
 		Transaction transaction = transactionRepository.findByBookingId(bookingId);
-		System.out.println(transaction);
 		Payment account = transaction.getPayment();
-		System.out.println(account);
 		double accountBalance = account.getAccountBalance();
-
 		account.setAccountBalance(accountBalance + transactionAmount);
-
 		Transaction deleteTransaction = transactionRepository.findByBookingIdAndPaymentId(bookingId, account.getId());
 		long id = deleteTransaction.getId();
 		transactionRepository.deleteById(id);
-
 		paymentRepository.save(account);
 		bookingDetailRepository.deleteById(bookingId);
 	}

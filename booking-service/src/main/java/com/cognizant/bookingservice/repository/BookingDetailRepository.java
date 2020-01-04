@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cognizant.bookingservice.model.BookingDetail;
-import com.cognizant.bookingservice.model.Vehicle;
+
 
 @Repository
 public interface BookingDetailRepository extends JpaRepository<BookingDetail, Long> {

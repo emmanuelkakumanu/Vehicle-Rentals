@@ -22,25 +22,10 @@ public class BookingDetailController {
 	@Autowired
 	BookingDetailService bookingDetailService;
 
-//	@GetMapping
-//	public List<BookingDetail> getAllBookingDetails(@PathVariable long userId){
-//		return bookingDetailService.getAllBookingDetails(userId);
-//	}
-
 	@GetMapping("/{id}")
 	public List<BookingDetail> getAllBookingDetails(@PathVariable long id) {
 		return bookingDetailService.getAllBookingDetails(id);
 	}
-
-//	@GetMapping("/{id}")
-//	public BookingDetail getBookingDetail(@PathVariable long id) {
-//		return bookingDetailService.getBookingDetail(id);
-//	}
-
-//	@GetMapping("/{id}")
-//	public List<BookingDetail> getBookingDetails(@PathVariable long id) {
-//		return bookingDetailService.getBookingDetails(id);
-//	}
 
 	@PutMapping
 	public void updateBooking(@RequestBody BookingDetail bookingDetail) {

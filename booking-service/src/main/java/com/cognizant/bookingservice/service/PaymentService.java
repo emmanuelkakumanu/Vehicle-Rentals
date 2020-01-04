@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cognizant.bookingservice.exception.AccountNotFoundException;
 import com.cognizant.bookingservice.exception.InsufficientBalance;
@@ -44,7 +43,6 @@ public class PaymentService {
 
 	@Transactional
 	public void updatePayment(PaymentDTO paymentDTO) throws AccountNotFoundException, InsufficientBalance {
-		LOGGER.debug("PAyment DTO: " + paymentDTO);
 		BookingDetail booking = paymentDTO.getBookingDetail();
 		Payment account = paymentDTO.getPayment();
 		long cardNumber = account.getCardNumber();
@@ -69,20 +67,4 @@ public class PaymentService {
 			}
 		}
 	}
-
-//	@Transactional
-//	public void refundPayment(PaymentDTO paymentDTO) throws AccountNotFoundException, InsufficientBalance {
-//		Payment account = paymentDTO.getPayment();
-//		long cardNumber = account.getCardNumber();
-//		Payment existingAccount = paymentRepository.findByCardNumber(cardNumber);
-//		if (existingAccount == null) {
-//			throw new AccountNotFoundException();
-//		} else {
-//			double balance = paymentDTO.getTotal();
-//			double existingBalance = existingAccount.getAccountBalance();
-//			existingBalance = existingBalance + balance;
-//			existingAccount.setAccountBalance(existingBalance);
-//			paymentRepository.save(existingAccount);
-//		}
-//	}
 }
