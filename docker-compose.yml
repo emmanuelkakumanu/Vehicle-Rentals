@@ -1,0 +1,73 @@
+version: '3'
+services:
+  vehicle-reservation-system-mysql:
+    image: mysql:8.0.18
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - d:/vehicledb:/var/lib/mysql
+      - ./dbscripts:/docker-entrypoint-initdb.d
+  
+
+  eureka-server:
+    image: eureka-server-app
+    build: eureka-server/.
+    ports:
+      - 8761:8761
+      
+  zuul-gateway:
+    image: zuul-gateway-app
+    build: zuul-gateway/.
+    ports:
+      - 8022:8022
+    links:
+      - vehicle-service
+      - signup-service
+      - booking-service
+      
+  vehicle-service:
+    image: vehicle-service-app
+    build: vehicle-service/.
+    ports:
+      - 8021:8021
+    depends_on:
+      - vehicle-reservation-system-mysql
+      - eureka-server
+    links:
+      - vehicle-reservation-system-mysql
+      
+      
+  signup-service:
+    image: signup-service-app
+    build: signup-service/.
+    ports:
+      - 8023:8023
+    depends_on:
+      - vehicle-reservation-system-mysql
+      - eureka-server
+    links:
+      - vehicle-reservation-system-mysql
+      
+  booking-service:
+    image: booking-service-app
+    build: booking-service/.
+    ports:
+      - 8024:8024
+    depends_on:
+      - vehicle-reservation-system-mysql
+      - eureka-server
+    links:      
+      - vehicle-reservation-system-mysql
+      
+  authentication-service:
+    image: authentication-service-app
+    build: authentication-service/.
+    ports:
+      - 8020:8020
+    depends_on:
+      - vehicle-reservation-system-mysql
+      - eureka-server
+    links:      
+      - vehicle-reservation-system-mysql
