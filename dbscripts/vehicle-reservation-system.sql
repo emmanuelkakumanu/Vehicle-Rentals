@@ -167,7 +167,7 @@ INSERT INTO `role` (ro_name) VALUES ('ADMIN'),('USER');
 INSERT INTO `user_role` (ur_ro_id,ur_us_id) VALUES (1,1),(2,2);
 
 INSERT INTO payment_account (pa_card_number, pa_cvv_number,pa_card_expiry_date,pa_bank,pa_card_holder_name,pa_account_balance)
-VALUES(1234567890123456,123,'12/12/2020','SBI','Nithya',90000);
+VALUES(1234567890123456,123,'12/12/2020','SBI','Emmanuel',90000);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
